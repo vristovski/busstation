@@ -32,7 +32,7 @@ class Register extends Component {
 
     render() {
         return (
-            <div className="body" style={{marginTop: "100px"}}>
+            <div className="body" style={{ marginTop: '100px' }}>
                 <div className="main">
                     <div className="container">
                         <h2>Регистрирај се</h2>
@@ -73,14 +73,17 @@ class Register extends Component {
                                 required
                             />
 
-                            <input
-                                type="text"
+                            <select // Updated: Use select element instead of input
                                 name="role"
-                                placeholder="Role"
                                 value={this.state.role}
                                 onChange={this.handleChange}
                                 required
-                            />
+                            >
+                                <option value="">Select Role</option>
+                                <option value="user">Passenger</option>
+                                <option value="admin">Driver</option>
+                                <option value="admin">Admin</option>
+                            </select>
 
                             <input
                                 type="date"
