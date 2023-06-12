@@ -44,7 +44,6 @@ app.post('/login', (req, res) => {
     const { email, password } = req.body;
     console.log("req.body", req.body);
 
-    // Call the LoginUser function in the database
     pool.query(
         'SELECT LoginUser($1, $2) AS result',
         [email, password],
@@ -54,8 +53,24 @@ app.post('/login', (req, res) => {
                 res.status(500).json({ error: 'An error occurred while logging in.' });
             } else {
                 const result = queryRes.rows[0].result;
-                res.json({ loggedIn: result });
+                // res.json({ loggedIn: result});
                 console.error('Successful');
+                if(result){
+                    pool.query(
+                        'SELECT "ID_User" FROM "Busify"."User" WHERE "Email" = $1 AND "Password" = $2',
+                        [email, password],
+                        (err, userDataRes) => {
+                            if (err) {
+                                console.error('Error executing query:', err);
+                                res.status(500).json({ error: 'An error occurred while fetching user data.' });
+                            } else {
+                                res.json({ loggedIn: result, userID: userDataRes.rows[0], email: email });
+                            }
+                        }
+                    );
+                }else {
+                    res.json({ loggedIn: false, userID: null });
+                }
             }
         }
     );

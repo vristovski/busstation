@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Thambi+2:wght@800&display=swap');
+.mainDiv{
+    font-family: 'Baloo Thambi 2', cursive;
+}
+ul{
+    width: 150px;
+}
+li {
+    display: inline;
+    margin-right: 10px;
+}
+
+li a {
+    text-decoration: none;
+    color: white;
+}
+
+.navBar{
+    background-image: url("../public/unsplash_tG822f1XzT4.png");
+    background-repeat: no-repeat;
+    color: white;
+    height: 250px;
+    /*background-size: cover;*/
+}
+
+.img{
+    background-image: url("../public/Logo.png");
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
+}
+
+.mainContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.firstNav, .middleNav {
+    display: flex;
+    align-items: center;
+}
+
+.middleNav{
+    margin-left: 350px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-left: 220px;
+}
+
+.button-container a{
+    text-decoration: none;
+}
+
+.signin-button {
+    border: 2px solid #B9C3FF;
+    border-radius: 15px;
+    padding: 10px 20px;
+    background: none;
+    width: 150px;
+    height: 40px;
+}
+
+.signin-button a{
+    color: white;
+    font-weight: bold;
+}
+
+.signup-button {
+    background-color: #3698BF;
+    border: none;
+    border-radius: 15px;
+    padding: 10px 20px;
+    margin-left: 10px;
+    width: 150px;
+    height: 40px;
+}
+
+.signup-button a{
+    color: #162040;
+    font-weight: bold;
+}
+
+.mainDiv input {
+    width: 200px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    margin-right: 5px;
+}
+
+.form label{
+    position:absolute;
+    left:0;
+    top:0;
+    opacity:0;
+    transition:all 1s ease;
+}
+input:not(:placeholder-shown) + label{
+    top:-10px;
+    opacity:1;
+}
+
+.form{
+    position:relative;
+}
+
+.searchRoute{
+    border-radius: 15px;
+    padding: 20px;
+    width: 1250px;
+    position: relative;
+    margin-top: -55px;
+    margin-left: 130px;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+button[type="submit"] {
+    background-color: #19A7CE;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    font-family: 'Baloo Thambi 2', cursive;
+    height: 55px;
+    margin-left: 5px;
+    margin-top: -1px;
+}
+
+#pictureColumn{
+    background-image: url("../public/icon.png");
+    background-repeat: no-repeat;
+    height: 20px;
+    width: 50px;
+}
+
+table{
+    margin-top: 30px;
+    margin-left: 150px;
+}
+
+table th{
+    width: 200px;
+    text-align: center;
+}
+
+table td{
+    text-align: center;
+    font-family: 'Vibur', cursive;
+}
+
+.footer{
+    background-color: black;
+    color: white;
+    margin-top: 50px;
+    height: 150px;
+    font-family: 'Vibur';
+}
+
+.circle{
+    background: #45b6d5;
+    width: 40px;
+    height: 40px;
+    border-radius: 60px;
+}
+
+.circle a{
+    text-decoration: none;
+    color: white;
+    font-family: 'Baloo Thambi 2', cursive;
+    font-size: 20px;
+}
+
