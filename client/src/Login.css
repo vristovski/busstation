@@ -17,14 +17,19 @@ h2 {
     font-family: 'Baloo Thambi 2', cursive;
 }
 
-label {
+label, option {
     display: block;
     margin-bottom: 5px;
     font-family: 'Baloo Thambi 2', cursive;
 }
 
-input,
 select {
+    width: 403px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+input {
     width: 380px;
     padding: 10px;
     margin-bottom: 10px;

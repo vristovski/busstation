@@ -40,48 +40,6 @@ app.post('/register', (req, res) => {
     );
 });
 
-// app.post('/register', (req, res) => {
-//     const { email, password, firstName, lastName, role, dateOfBirth } = req.body;
-//
-//     // Check if user already exists
-//     pool.query(
-//         'SELECT * FROM "Busify"."User" WHERE "Email" = $1',
-//         [email],
-//         (err, queryRes) => {
-//             console.log("Started...")
-//             if (err) {
-//                 console.log("First if...")
-//                 console.error('Error executing query:', err);
-//                 res.status(500).json({ error: 'An error occurred while registering the user.' });
-//             } else {
-//                 console.log("First else...")
-//                 if (queryRes.rows.length > 0) {
-//                     console.log("Second if...")
-//                     // User already exists
-//                     res.status(400).json({ error: 'User already exists.' });
-//                 } else {
-//                     console.log("Second else...")
-//                     // User doesn't exist, insert the new user
-//                     pool.query(
-//                         'INSERT INTO "Busify"."User" ("Email", "Password", "First_Name", "Last_Name", "Role", "Date_Of_Birth") VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-//                         [email, password, firstName, lastName, role, dateOfBirth],
-//                         (err, insertRes) => {
-//                             if (err) {
-//                                 console.error('Error executing query:', err);
-//                                 res.status(500).json({ error: 'An error occurred while registering the user.' });
-//                             } else {
-//                                 console.log("Third else...")
-//                                 res.json({ message: 'User registered successfully.' });
-//                             }
-//                         }
-//                     );
-//                 }
-//             }
-//         }
-//     );
-// });
-
-
 app.post('/login', (req, res) => {
     const { email, password } = req.body;
     console.log("req.body", req.body);
@@ -102,6 +60,43 @@ app.post('/login', (req, res) => {
         }
     );
 });
+
+app.get('/schedule', (req, res) => {
+    // Query the database to fetch the schedule data
+    pool.query(
+        `SELECT * FROM Schedule`,
+        (err, queryRes) => {
+            if (err) {
+                console.error('Error executing query:', err);
+                res.status(500).json({ error: 'An error occurred while fetching the schedule.' });
+            } else {
+                const schedule = queryRes.rows;
+                res.json(schedule);
+            }
+        }
+    );
+});
+
+app.post('/searchRoute', (req, res) => {
+    const { startLocation, endLocation } = req.body;
+    console.log("req.body", req.body);
+    // Call the searchRoute function in the database
+    pool.query(
+        'SELECT * FROM searchRoute($1, $2)',
+        [startLocation, endLocation],
+        (err, queryRes) => {
+            if (err) {
+                console.error('Error executing query:', err);
+                res.status(500).json({ error: 'An error occurred while searching for routes.' });
+            } else {
+                const searchResults = queryRes.rows;
+                console.error('Successful: ', queryRes.rows);
+                res.json(searchResults);
+            }
+        }
+    );
+});
+
 
 app.listen(5000, () => {
     console.log('Server listening on port 3001');
