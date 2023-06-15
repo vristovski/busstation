@@ -112,6 +112,108 @@ app.post('/searchRoute', (req, res) => {
     );
 });
 
+app.post('/calculatePrice', (req, res) => {
+    const { startLocation, endLocation } = req.body;
+    console.log("req.body", req.body);
+    // Call the searchRoute function in the database
+    pool.query(
+        'SELECT "Price" FROM Routes_With_Prices WHERE StartPoint = $1 AND EndPoint = $2',
+        [startLocation, endLocation],
+        (err, queryRes) => {
+            if (err) {
+                console.error('Error executing query:', err);
+                res.status(500).json({ error: 'An error occurred while calculating price.' });
+            } else {
+                const price = queryRes.rows[0].Price;
+                console.error('Successful: ', queryRes.rows[0].Price);
+                res.json(price);
+            }
+        }
+    );
+});
+
+app.post('/bookTicket', (req, res) => {
+    const { userID, startLocation, endLocation, seat } = req.body;
+    console.log("req.body", req.body);
+    // Call the searchRoute function in the database
+    pool.query(
+        'SELECT BookTicket($1, $2, $3, $4) AS result',
+        [userID, startLocation, endLocation, seat],
+        (err, queryRes) => {
+            if (err) {
+                console.error('Error executing query:', err);
+                res.status(500).json({ error: 'An error occurred while calculating price.' });
+            } else {
+                const ticket = queryRes.rows[0].result;
+                console.error('Successful: ', queryRes.rows[0].result);
+                res.json(ticket);
+            }
+        }
+    );
+});
+
+app.post('/addBaggage', (req, res) => {
+    const { ticketID, weight, size, baggageType } = req.body;
+    console.log("req.body", req.body);
+
+    pool.query(
+        'SELECT addBaggage($1, $2, $3, $4) AS baggageId',
+        [ticketID, weight, size, baggageType],
+        (err, queryRes) => {
+            if (err) {
+                console.error('Error executing query:', err);
+                res.status(500).json({ error: 'An error occurred while adding baggage.' });
+            } else {
+                const baggageId = queryRes.rows[0].baggageid;
+                console.log("baggageId", queryRes.rows[0].baggageid);
+                res.json({ baggageId });
+            }
+        }
+    );
+});
+
+
+app.post('/addInsurance', (req, res) => {
+    const { userID, companyID, Type, from, to } = req.body;
+    console.log("req.body", req.body);
+
+    pool.query(
+        'SELECT AddTravelInsurance($1, $2, $3, $4, $5) AS insuranceId',
+        [userID, companyID, Type, from, to],
+        (err, queryRes) => {
+            if (err) {
+                console.error('Error executing query:', err);
+                res.status(500).json({ error: 'An error occurred while adding travel insurance.' });
+            } else {
+                const insuranceId = queryRes.rows[0].insuranceid;
+                console.log("insuranceId", queryRes.rows[0].insuranceid);
+                res.json({ insuranceId });
+            }
+        }
+    );
+});
+
+app.post('/getBusInfo', (req, res) => {
+    const { ticketID } = req.body;
+    console.log("req.body", req.body);
+    // Call the searchRoute function in the database
+    pool.query(
+        'Select "Departure_Time", Company_Name from user_tickets where "ID_Ticket" = $1',
+        [ticketID],
+        (err, queryRes) => {
+            if (err) {
+                console.error('Error executing query:', err);
+                res.status(500).json({ error: 'An error occurred while calculating price.' });
+            } else {
+                const result = queryRes.rows[0];
+                console.error('Successful: ', queryRes.rows[0]);
+                res.json(result);
+            }
+        }
+    );
+});
+
+
 
 app.listen(5000, () => {
     console.log('Server listening on port 3001');

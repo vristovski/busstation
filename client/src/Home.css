@@ -168,6 +168,7 @@ table td{
     width: 40px;
     height: 40px;
     border-radius: 60px;
+    border: 1px solid #45b6d5;
 }
 
 .circle a{

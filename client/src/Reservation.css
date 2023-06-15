@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Thambi+2:wght@800&display=swap');
+.mainDiv{
+    font-family: 'Baloo Thambi 2', cursive;
+}
+ul{
+    width: 150px;
+}
+li {
+    display: inline;
+    margin-right: 10px;
+}
+
+li a {
+    text-decoration: none;
+    color: #3250D5;
+}
+
+.navBarReservation{
+    color: #3250D5;
+    height: 80px;
+    border-bottom: 1px solid gray;
+}
+
+.img{
+    background-image: url("../public/Logo (2).png");
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
+}
+
+.signin-button-reservation {
+    border: 2px solid #3250D5;
+    border-radius: 15px;
+    padding: 10px 20px;
+    background: none;
+    width: 150px;
+    height: 40px;
+}
+
+.signin-button-reservation a{
+    font-weight: bold;
+    color: #3250D5;
+}
+
+.circle-reservation{
+    background: #3250D5;
+    width: 40px;
+    height: 40px;
+    border-radius: 60px;
+    border: 1px solid #3250D5;
+}
+
+.circle-reservation a{
+    text-decoration: none;
+    color: white;
+    font-family: 'Baloo Thambi 2', cursive;
+    font-size: 20px;
+}
+
+.img1{
+    background-image: url("../public/Logo.png");
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
+}
+
+.breadcrumbs {
+    text-align: center;
+    border-bottom: 1px solid gray;
+}
+
+.routeResForm {
+    border: 1px solid #3250D5;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-left: 500px;
+    width: 480px;
+    padding: 30px;
+    margin-top: 30px;
+}
+
+.routeBagForm {
+    border: 1px solid #3250D5;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-left: 400px;
+    width: 650px;
+    padding: 30px;
+    margin-top: 30px;
+}
+
+.routeBagForm label {
+    display: inline-block;
+}
+
+.vertical-align {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.imgOp1 {
+    background-image: url("../public/carryOn.png");
+    background-repeat: no-repeat;
+    width: 75px;
+    height: 100px;
+}
+
+.imgOp2 {
+    background-image: url("../public/trolleyBag.png");
+    background-repeat: no-repeat;
+    width: 75px;
+    height: 100px;
+}
+
+.imgOp3 {
+    background-image: url("../public/checkInBag.png");
+    background-repeat: no-repeat;
+    width: 100px;
+    height: 100px;
+}
+
+.routeInsuranceForm {
+    border: 1px solid #3250D5;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-left: 470px;
+    width: 500px;
+    padding: 30px;
+    margin-top: 30px;
+}
+
+.routeInsuranceForm label {
+    display: inline-block;
+}
+
+.card {
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-left: 500px;
+    width: 400px;
+    padding: 30px;
+    margin-top: 30px;
+}
+
+.imgCal {
+    background-image: url("../public/calendarIcon.png");
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+}
+
+.imgTime {
+    background-image: url("../public/timeIcon.png");
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+}
