@@ -84,9 +84,9 @@ class Register extends Component {
                                     required
                                 >
                                     <option value="">Select Role</option>
-                                    <option value="user">Passenger</option>
-                                    <option value="admin">Driver</option>
-                                    <option value="admin">Admin</option>
+                                    <option value="Passenger">Passenger</option>
+                                    <option value="Driver">Driver</option>
+                                    <option value="Admin">Admin</option>
                                 </select>
 
                                 <input

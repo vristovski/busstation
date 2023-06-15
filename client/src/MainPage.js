@@ -68,10 +68,10 @@ class MainPage extends Component {
                             <nav>
                                 <ul>
                                     <li>
-                                        <Link to="/">Contact</Link>
+                                        <Link to="/" style={{color: 'white'}}>Contact</Link>
                                     </li>
                                     <li>
-                                        <Link to="/">About us</Link>
+                                        <Link to="/" style={{color: 'white'}}>About us</Link>
                                     </li>
                                 </ul>
                             </nav>
@@ -220,13 +220,13 @@ class MainPage extends Component {
                         <nav >
                             <ul style={{width: '1450px'}}>
                                 <li>
-                                    <Link to="/">Privacy Policy</Link>
+                                    <Link to="/" style={{color: 'white'}}>Privacy Policy</Link>
                                 </li>
                                 <li>
-                                    <Link to="/">Terms of Service</Link>
+                                    <Link to="/" style={{color: 'white'}}>Terms of Service</Link>
                                 </li>
                                 <li>
-                                    <Link to="/">Cookies Settings</Link>
+                                    <Link to="/" style={{color: 'white'}}>Cookies Settings</Link>
                                 </li>
                                 <li style={{marginLeft: '650px'}}>
                                     2023 International Intercity bus station Skopje. All right reserved.

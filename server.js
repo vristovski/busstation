@@ -34,11 +34,30 @@ app.post('/register', (req, res) => {
                 res.status(500).json({ error: 'An error occurred while registering the user.' });
             } else {
                 const result = queryRes.rows[0].result;
-                res.json({ message: result });
+                if (role === 'Passenger') {
+                    registerPassenger(result);
+                }
+                res.json(result);
             }
         }
     );
+
+    function registerPassenger(userID) {
+        pool.query(
+            'INSERT INTO "Busify"."Passenger" ("ID_User") VALUES ($1)',
+            [userID],
+            (err, queryRes) => {
+                if (err) {
+                    console.error('Error executing query:', err);
+                    res.status(500).json({ error: 'An error occurred while registering the passenger.' });
+                } else {
+                    console.log("Successfully registered the passenger.", queryRes);
+                }
+            }
+        );
+    }
 });
+
 
 app.post('/login', (req, res) => {
     const { email, password } = req.body;

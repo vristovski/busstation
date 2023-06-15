@@ -187,7 +187,7 @@ class Reservation extends Component {
                             <div style={{width: '210px'}}>
                                 <p>Меѓународна - Меѓуградска <b>Автобуска станица - Скопје</b></p>
                             </div>
-                            <div className='img'>
+                            <div className='imgReservation'>
 
                             </div>
                             <div style={{width: '150px'}}>
@@ -195,7 +195,7 @@ class Reservation extends Component {
                             </div>
                         </div>
                         <div className="button-container" style={{marginLeft: '150px'}}>
-                            <button className="signin-button-reservation" style={{marginLeft: '15px'}}><Link to="/login">Одјави се</Link></button>
+                            <button className="signin-button-reservation" style={{marginLeft: '15px'}}><Link to="/">Одјави се</Link></button>
                             <button className="circle-reservation" style={{marginLeft: '15px'}}><Link to="/">{this.state.firstLetter}</Link></button>
                         </div>
                     </div>
