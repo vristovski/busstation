@@ -144,7 +144,7 @@ class MainPage extends Component {
                                     shrink: true,
                                 }}
                             />
-                            <button type="submit">Пребарувај</button>
+                            <button type="submit" style={{marginLeft: '10px'}}>Пребарувај</button>
                         </form>
                     </div>
                     <div className="table">
