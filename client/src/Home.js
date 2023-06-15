@@ -92,7 +92,7 @@ class Home extends Component {
                             </div>
                         </div>
                         <div className="button-container" style={{marginLeft: '150px'}}>
-                            <button className="signup-button"><Link to="/register">Резервирај</Link></button>
+                            <button className="signup-button"><Link to="/reservation">Резервирај</Link></button>
                             <button className="signin-button" style={{marginLeft: '15px'}}><Link to="/login">Одјави се</Link></button>
                             <button className="circle" style={{marginLeft: '15px'}}><Link to="/">{this.state.firstLetter}</Link></button>
                         </div>
@@ -222,7 +222,7 @@ class Home extends Component {
 
                     </div>
                     <div>
-                        <nav >
+                        <nav className="reservationFooter">
                             <ul style={{width: '1450px'}}>
                                 <li>
                                     <Link to="/">Privacy Policy</Link>
