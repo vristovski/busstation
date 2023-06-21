@@ -196,7 +196,7 @@ class Reservation extends Component {
                         </div>
                         <div className="button-container" style={{marginLeft: '150px'}}>
                             <button className="signin-button-reservation" style={{marginLeft: '15px'}}><Link to="/">Одјави се</Link></button>
-                            <button className="circle-reservation" style={{marginLeft: '15px'}}><Link to="/">{this.state.firstLetter}</Link></button>
+                            <button className="circle-reservation" style={{marginLeft: '15px'}}><Link to="/profile">{this.state.firstLetter}</Link></button>
                         </div>
                     </div>
                 </div>

@@ -232,6 +232,45 @@ app.post('/getBusInfo', (req, res) => {
     );
 });
 
+app.post('/getUserData', (req, res) => {
+    const { userID } = req.body;
+    console.log("req.body", req.body);
+    pool.query(
+        'Select * from "Busify"."User" where "ID_User" = $1',
+        [userID],
+        (err, queryRes) => {
+            if (err) {
+                console.error('Error executing query:', err);
+                res.status(500).json({ error: 'An error occurred while calculating price.' });
+            } else {
+                const result = queryRes.rows[0];
+                console.error('Successful: ', queryRes.rows[0]);
+                res.json(result);
+            }
+        }
+    );
+});
+
+app.post('/updateProfile', async (req, res) => {
+    const { userID, email, firstName, lastName, dateOfBirth } = req.body;
+    console.log("req.body", req.body);
+
+    pool.query(
+        'SELECT updateprofile($1, $2, $3, $4, $5) AS result',
+        [userID, firstName, lastName, email, dateOfBirth],
+        (err, queryRes) => {
+            if (err) {
+                console.error('Error updating profile:', err);
+                res.status(500).json({ error: 'Failed to update profile' });
+            } else {
+                console.log('Successful');
+                res.json({ message: 'Profile updated successfully' });
+            }
+        }
+    );
+});
+
+
 
 
 app.listen(5000, () => {

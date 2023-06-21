@@ -5,6 +5,7 @@ import Login from './Login';
 import MainPage from "./MainPage";
 import Home from "./Home"
 import Reservation from "./Reservation";
+import Profile from "./Profile";
 
 class App extends Component {
     render() {
@@ -16,6 +17,7 @@ class App extends Component {
                         <Route path="/login" element={<Login />}/>
                         <Route path="/home" element={<Home />}/>
                         <Route path="/reservation" element={<Reservation />}/>
+                        <Route path="/profile" element={<Profile />}/>
                     </Routes>
 
             </div>
