@@ -94,7 +94,7 @@ class Home extends Component {
                         <div className="button-container" style={{marginLeft: '150px'}}>
                             <button className="signup-button"><Link to="/reservation">Резервирај</Link></button>
                             <button className="signin-button" style={{marginLeft: '15px'}}><Link to="/">Одјави се</Link></button>
-                            <button className="circle" style={{marginLeft: '15px'}}><Link to="/">{this.state.firstLetter}</Link></button>
+                            <button className="circle" style={{marginLeft: '15px'}}><Link to="/profile">{this.state.firstLetter}</Link></button>
                         </div>
                     </div>
                 </div>
