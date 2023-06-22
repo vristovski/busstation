@@ -72,7 +72,8 @@ class Reservation extends Component {
                 userID,
                 startLocation: this.state.from,
                 endLocation: this.state.to,
-                seat: this.state.seat
+                seat: this.state.seat,
+                tourdate: this.state.date
             });
             console.log("ticketID", response.data)
             this.setState({ticketID: response.data});
