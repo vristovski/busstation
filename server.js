@@ -152,12 +152,12 @@ app.post('/calculatePrice', (req, res) => {
 });
 
 app.post('/bookTicket', (req, res) => {
-    const { userID, startLocation, endLocation, seat } = req.body;
+    const { userID, startLocation, endLocation, seat, tourdate } = req.body;
     console.log("req.body", req.body);
     // Call the searchRoute function in the database
     pool.query(
-        'SELECT BookTicket($1, $2, $3, $4) AS result',
-        [userID, startLocation, endLocation, seat],
+        'SELECT BookTicket($1, $2, $3, $4, $5) AS result',
+        [userID, startLocation, endLocation, seat, tourdate],
         (err, queryRes) => {
             if (err) {
                 console.error('Error executing query:', err);
@@ -270,6 +270,24 @@ app.post('/updateProfile', async (req, res) => {
     );
 });
 
+app.post('/getFutureUserTickets', (req, res) => {
+    const { userID } = req.body;
+    console.log("req.body", req.body);
+    pool.query(
+        'Select * from user_tickets where "ID_User" = $1',
+        [userID],
+        (err, queryRes) => {
+            if (err) {
+                console.error('Error executing query:', err);
+                res.status(500).json({ error: 'An error occurred while calculating price.' });
+            } else {
+                const result = queryRes.rows;
+                console.error('Successful: ', queryRes.rows);
+                res.json(result);
+            }
+        }
+    );
+});
 
 
 
