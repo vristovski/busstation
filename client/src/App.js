@@ -7,6 +7,7 @@ import Home from "./Home"
 import Reservation from "./Reservation";
 import Profile from "./Profile";
 import FutureTours from "./FutureTours";
+import PastTours from "./PastTours";
 
 class App extends Component {
     render() {
@@ -20,6 +21,7 @@ class App extends Component {
                         <Route path="/reservation" element={<Reservation />}/>
                         <Route path="/profile" element={<Profile />}/>
                         <Route path="/futureTours" element={<FutureTours />}/>
+                        <Route path="/pastTours" element={<PastTours />}/>
                     </Routes>
 
             </div>

@@ -173,7 +173,7 @@ class Profile extends Component {
                         <div className="leftAside">
                             <div className="links">
                                 <div style={{borderBottom: '2px solid gray'}}><p><Link to="/futureTours">Идни патувања</Link></p></div>
-                                <div><p><Link to="/">Историја на патувања</Link></p></div>
+                                <div><p><Link to="/pastTours">Историја на патувања</Link></p></div>
                             </div>
                         </div>
                     </div>
