@@ -290,6 +290,27 @@ app.post('/getFutureUserTickets', (req, res) => {
 });
 
 
+app.post('/addReview', (req, res) => {
+    const { ID_Route, ID_Passenger, Review, Feedback } = req.body;
+    console.log("req.body", req.body);
+
+    pool.query(
+        'SELECT AddReview($1, $2, $3, $4) AS reviewID',
+        [ID_Route, ID_Passenger, Review, Feedback],
+        (err, queryRes) => {
+            if (err) {
+                console.error('Error executing query:', err);
+                res.status(500).json({ error: 'An error occurred while adding travel insurance.' });
+            } else {
+                const reviewId = queryRes.rows[0].reviewid;
+                console.log("reviewId", queryRes.rows[0].reviewid);
+                res.json({ reviewId });
+            }
+        }
+    );
+});
+
+
 
 app.listen(5000, () => {
     console.log('Server listening on port 3001');
