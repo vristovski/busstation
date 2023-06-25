@@ -126,6 +126,9 @@ class PastTours extends Component {
                                     <li>
                                         <Link to="/">About us</Link>
                                     </li>
+                                    <li>
+                                        <Link to="/routeReviews">Reviews</Link>
+                                    </li>
                                 </ul>
                             </nav>
                         </div>

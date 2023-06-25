@@ -310,6 +310,22 @@ app.post('/addReview', (req, res) => {
     );
 });
 
+app.get('/routeReviews', (req, res) => {
+    // Query the database to fetch the schedule data
+    pool.query(
+        `SELECT * FROM Route_Review`,
+        (err, queryRes) => {
+            if (err) {
+                console.error('Error executing query:', err);
+                res.status(500).json({ error: 'An error occurred while fetching the reviews.' });
+            } else {
+                const reviews = queryRes.rows;
+                res.json(reviews);
+            }
+        }
+    );
+});
+
 
 
 app.listen(5000, () => {

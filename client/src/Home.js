@@ -77,6 +77,9 @@ class Home extends Component {
                                     <li>
                                         <Link to="/" style={{color: 'white'}}>About us</Link>
                                     </li>
+                                    <li>
+                                        <Link to="/routeReviews" style={{color: 'white'}}>Reviews</Link>
+                                    </li>
                                 </ul>
                             </nav>
                         </div>
