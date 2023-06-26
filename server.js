@@ -76,7 +76,7 @@ app.post('/login', (req, res) => {
                 console.error('Successful');
                 if(result){
                     pool.query(
-                        'SELECT "ID_User" FROM "Busify"."User" WHERE "Email" = $1 AND "Password" = $2',
+                        'SELECT "ID_User", "Role" FROM "Busify"."User" WHERE "Email" = $1 AND "Password" = $2',
                         [email, password],
                         (err, userDataRes) => {
                             if (err) {

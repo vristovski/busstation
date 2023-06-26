@@ -117,20 +117,9 @@ class MainPage extends Component {
                             />
                             <TextField
                                 name="departureDate"
-                                label="Почетен датум"
+                                label="Датум"
                                 type="date"
                                 value={this.state.departureDate}
-                                onChange={this.handleChange}
-                                required
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                            />
-                            <TextField
-                                name="returnDate"
-                                label="Краен датум"
-                                type="date"
-                                value={this.state.returnDate}
                                 onChange={this.handleChange}
                                 required
                                 InputLabelProps={{
