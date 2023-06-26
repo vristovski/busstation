@@ -10,7 +10,9 @@ class Login extends Component {
         this.state = {
             email: '',
             password: '',
-            isLoggedIn: false
+            isLoggedIn: false,
+            role: '',
+            message: '',
         };
     }
 
@@ -22,11 +24,19 @@ class Login extends Component {
         event.preventDefault();
         try {
             const response = await axios.post('/login', this.state);
-            console.log(response.data);
-            console.log('userID', response.data.userID.ID_User);
-            localStorage.setItem('userID', response.data.userID.ID_User);
-            localStorage.setItem('email', response.data.email);
-            this.setState({isLoggedIn: true})
+
+            if(response.data.userID !== null)
+            {
+                console.log(response.data);
+                localStorage.setItem('userID', response.data.userID.ID_User);
+                localStorage.setItem('email', response.data.email);
+                localStorage.setItem('role', response.data.userID.Role);
+                this.setState({isLoggedIn: true, role: response.data.userID.Role})
+            }
+            else{
+                this.setState({message: 'Неточна е-пошта или лозинка'});
+            }
+
         } catch (error) {
             console.error('Error logging in:', error);
         }
@@ -39,6 +49,7 @@ class Login extends Component {
                     <div className="main">
                         <div className="container">
                             <h2>Најави се</h2>
+                            <div style={{display: this.state.message !== '' ? 'block' : 'none'}} className='errorMessage'>{this.state.message}</div>
                             <form onSubmit={this.handleSubmit}>
                                 <input
                                     type="email"

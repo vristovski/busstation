@@ -102,7 +102,7 @@ class Home extends Component {
                     </div>
                 </div>
                 <div className="mainDiv">
-                    <div className="searchRoute" style={{width: '1260px'}}>
+                    <div className="searchRoute">
                         <form onSubmit={this.handleSubmit}>
                             <TextField
                                 name="from"
@@ -122,20 +122,9 @@ class Home extends Component {
                             />
                             <TextField
                                 name="departureDate"
-                                label="Почетен датум"
+                                label="Датум"
                                 type="date"
                                 value={this.state.departureDate}
-                                onChange={this.handleChange}
-                                required
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                            />
-                            <TextField
-                                name="returnDate"
-                                label="Краен датум"
-                                type="date"
-                                value={this.state.returnDate}
                                 onChange={this.handleChange}
                                 required
                                 InputLabelProps={{

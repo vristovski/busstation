@@ -23,6 +23,11 @@ label, option {
     font-family: 'Baloo Thambi 2', cursive;
 }
 
+.errorMessage {
+    color: darkred;
+    font-family: 'Baloo Thambi 2', cursive;
+}
+
 select {
     width: 403px;
     padding: 10px;

@@ -86,7 +86,7 @@ li a {
 }
 
 .mainDiv input {
-    width: 200px;
+    width: 210px;
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 10px;
@@ -112,10 +112,10 @@ input:not(:placeholder-shown) + label{
 .searchRoute{
     border-radius: 15px;
     padding: 20px;
-    width: 1250px;
+    width: 1080px;
     position: relative;
     margin-top: -55px;
-    margin-left: 130px;
+    margin-left: 200px;
     background-color: white;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
