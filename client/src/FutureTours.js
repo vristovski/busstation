@@ -64,10 +64,10 @@ class FutureTours extends Component {
                                 <nav>
                                     <ul>
                                         <li>
-                                            <Link to="/">Contact</Link>
+                                            <Link to="/home">Contact</Link>
                                         </li>
                                         <li>
-                                            <Link to="/">About us</Link>
+                                            <Link to="/home">About us</Link>
                                         </li>
                                         <li>
                                             <Link to="/routeReviews">Reviews</Link>
@@ -109,8 +109,8 @@ class FutureTours extends Component {
                                         </div>
                                         <div style={{ clear: 'both', marginTop: '20px' }}>
                                             <div style={{ display: "inline-block"}}>Датум: <span style={{ color: '#3250D5' }}>{new Date(ticket.Tour_Date).toLocaleDateString('en-GB')}</span></div>
-                                            <div style={{ display: "inline-block", marginLeft: '55px' }}>Седиште бр. {ticket.Seat}</div>
-                                            <div style={{ display: "inline-block", marginLeft: '55px' }}>Багаж: {ticket.Type}</div>
+                                            <div style={{ display: "inline-block", marginLeft: '40px' }}>Седиште бр. {ticket.Seat}</div>
+                                            <div style={{ display: "inline-block", marginLeft: '40px' }}>Багаж: {ticket.Type}</div>
                                         </div>
                                     </div>
                                 </div>

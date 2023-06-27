@@ -5,6 +5,16 @@ import './Home.css';
 import Register from "./Register";
 import Login from "./Login";
 import { TextField } from '@mui/material';
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Radio from "@mui/material/Radio";
+import DialogActions from "@mui/material/DialogActions";
+import Button from "@mui/material/Button";
 
 class Home extends Component {
     constructor(props) {
@@ -19,6 +29,8 @@ class Home extends Component {
             show: true,
             schedule1: [],
             firstLetter: '',
+            role: '',
+            open: false,
         };
     }
 
@@ -59,7 +71,16 @@ class Home extends Component {
 
     componentDidMount() {
         this.state.firstLetter = localStorage.getItem("email").charAt(0).toUpperCase();
+        this.state.role = localStorage.getItem("role");
         this.fetchSchedule();
+    }
+
+    handleOpen () {
+        this.setState({open: true});
+    }
+
+    handleClose () {
+        this.setState({open: false});
     }
 
 
@@ -197,6 +218,22 @@ class Home extends Component {
                             </tbody>
                         </table>
                     </div>
+                    {/*<div style={{display: this.state.role === 'Admin' ?  'block' : 'none'}}>*/}
+                    {/*    <button className="addRouteButton" onClick={() => {this.setState({open: true})}}>Додај рута</button>*/}
+                    {/*    <div className="dialog1">*/}
+                    {/*        <Dialog open={this.state.open} onClose={() => {this.handleClose()}}>*/}
+                    {/*            <DialogTitle>Додај рута</DialogTitle>*/}
+                    {/*            <DialogContent>*/}
+                    {/*                <FormControl>*/}
+                    {/*                </FormControl>*/}
+                    {/*            </DialogContent>*/}
+                    {/*            <DialogActions>*/}
+                    {/*                <Button onClick={() => {this.handleClose()}}>Откажи</Button>*/}
+                    {/*                <Button>Зачувај</Button>*/}
+                    {/*            </DialogActions>*/}
+                    {/*        </Dialog>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
                 </div>
                 <div className="footer">
                     <div className="middleNav" style={{marginLeft: '535px'}}>
