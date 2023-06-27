@@ -166,8 +166,8 @@ class PastTours extends Component {
                                     </div>
                                     <div style={{ clear: 'both', marginTop: '20px' }}>
                                         <div style={{ display: "inline-block"}}>Датум: <span style={{ color: '#3250D5' }}>{new Date(ticket.Tour_Date).toLocaleDateString('en-GB')}</span></div>
-                                        <div style={{ display: "inline-block", marginLeft: '55px' }}>Седиште бр. {ticket.Seat}</div>
-                                        <div style={{ display: "inline-block", marginLeft: '55px' }}>Багаж: {ticket.Type}</div>
+                                        <div style={{ display: "inline-block", marginLeft: '40px' }}>Седиште бр. {ticket.Seat}</div>
+                                        <div style={{ display: "inline-block", marginLeft: '40px' }}>Багаж: {ticket.Type}</div>
                                     </div>
                                     <div>
                                         <button className="reviewButton" onClick={() => {this.handleOpen(); this.setState({passengerID: ticket.ID_Passenger, routeID: ticket.ID_Route})}}>Оцени патување</button>

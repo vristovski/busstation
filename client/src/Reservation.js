@@ -255,6 +255,7 @@ class Reservation extends Component {
                                     type="text"
                                     value={this.state.seat}
                                     onChange={this.handleChange}
+                                    style={{width: '217px'}}
                                 /> <br />
                                 <TextField
                                     disabled
