@@ -38,6 +38,7 @@ app.post('/register', (req, res) => {
                     registerPassenger(result);
                 }
                 res.json(result);
+                console.log(result);
             }
         }
     );
@@ -84,11 +85,15 @@ app.post('/login', (req, res) => {
                                 res.status(500).json({ error: 'An error occurred while fetching user data.' });
                             } else {
                                 res.json({ loggedIn: result, userID: userDataRes.rows[0], email: email });
+                                console.log("loggedIn", result);
+                                console.log("userID",  userDataRes.rows[0]);
+                                console.log("email", email);
                             }
                         }
                     );
                 }else {
                     res.json({ loggedIn: false, userID: null });
+                    console.log("loggedIn", false);
                 }
             }
         }
@@ -106,6 +111,7 @@ app.get('/schedule', (req, res) => {
             } else {
                 const schedule = queryRes.rows;
                 res.json(schedule);
+                console.log("schedule", schedule);
             }
         }
     );
@@ -124,7 +130,7 @@ app.post('/searchRoute', (req, res) => {
                 res.status(500).json({ error: 'An error occurred while searching for routes.' });
             } else {
                 const searchResults = queryRes.rows;
-                console.error('Successful: ', queryRes.rows);
+                console.log('Successful: ', queryRes.rows);
                 res.json(searchResults);
             }
         }
@@ -144,7 +150,7 @@ app.post('/calculatePrice', (req, res) => {
                 res.status(500).json({ error: 'An error occurred while calculating price.' });
             } else {
                 const price = queryRes.rows[0].Price;
-                console.error('Successful: ', queryRes.rows[0].Price);
+                console.log('Successful: ', queryRes.rows[0].Price);
                 res.json(price);
             }
         }
@@ -164,7 +170,7 @@ app.post('/bookTicket', (req, res) => {
                 res.status(500).json({ error: 'An error occurred while calculating price.' });
             } else {
                 const ticket = queryRes.rows[0].result;
-                console.error('Successful: ', queryRes.rows[0].result);
+                console.log('Successful: ', queryRes.rows[0].result);
                 res.json(ticket);
             }
         }
@@ -225,7 +231,7 @@ app.post('/getBusInfo', (req, res) => {
                 res.status(500).json({ error: 'An error occurred while calculating price.' });
             } else {
                 const result = queryRes.rows[0];
-                console.error('Successful: ', queryRes.rows[0]);
+                console.log('Successful: ', queryRes.rows[0]);
                 res.json(result);
             }
         }
@@ -244,7 +250,7 @@ app.post('/getUserData', (req, res) => {
                 res.status(500).json({ error: 'An error occurred while calculating price.' });
             } else {
                 const result = queryRes.rows[0];
-                console.error('Successful: ', queryRes.rows[0]);
+                console.log('Successful: ', queryRes.rows[0]);
                 res.json(result);
             }
         }
@@ -282,7 +288,7 @@ app.post('/getFutureUserTickets', (req, res) => {
                 res.status(500).json({ error: 'An error occurred while calculating price.' });
             } else {
                 const result = queryRes.rows;
-                console.error('Successful: ', queryRes.rows);
+                console.log('Successful: ', queryRes.rows);
                 res.json(result);
             }
         }
@@ -320,6 +326,7 @@ app.get('/routeReviews', (req, res) => {
                 res.status(500).json({ error: 'An error occurred while fetching the reviews.' });
             } else {
                 const reviews = queryRes.rows;
+                console.log("reviews", queryRes.rows);
                 res.json(reviews);
             }
         }
