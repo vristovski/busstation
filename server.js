@@ -334,6 +334,62 @@ app.get('/routeReviews', (req, res) => {
 });
 
 
+function getNumberOfSeatsByCompanyId(id_company, callback) {
+    pool.query(
+        'SELECT "ID_Bus" FROM "Busify"."Bus" WHERE "ID_Bus_Company" = $1 LIMIT 1',
+        [id_company],
+        (err, queryRes) => {
+            if (err) {
+                console.error('Error getting bus ID:', err);
+                callback(err, null);
+            } else {
+                const busID = queryRes.rows[0].ID_Bus; // Corrected the column name
+                console.error('busID', busID);
+                callback(null, busID);
+            }
+        }
+    );
+}
+
+// Route to add a new route
+app.post('/addRoute', async (req, res) => {
+    const newRoute = req.body;
+
+    try {
+        getNumberOfSeatsByCompanyId(newRoute.ID_Bus_Company, (err, busID) => {
+            if (err) {
+                console.error('Error retrieving bus ID:', err);
+                res.status(500).json({ error: 'An error occurred while retrieving the bus ID.' });
+            } else {
+                console.log("newRoute", newRoute);
+                pool.query(
+                    'INSERT INTO "Busify"."Route" ("ID_Bus", "Start_Point", "End_Point", "Arrival_Time", "Departure_Time", "Distance", "ID_Bus_Company") VALUES ($1, $2, $3, $4, $5, $6, $7)',
+                    [
+                        busID, // Use the retrieved busID here
+                        newRoute.Start_Point,
+                        newRoute.End_Point,
+                        newRoute.Arrival_Time,
+                        newRoute.Departure_Time,
+                        newRoute.Distance,
+                        newRoute.ID_Bus_Company,
+                    ],
+                    (err, queryRes) => {
+                        if (err) {
+                            console.error('Error adding new route:', err);
+                            res.status(500).json({ error: 'An error occurred while adding the route.' });
+                        } else {
+                            console.log('New route added to the database');
+                            res.json({ message: 'New route added successfully' });
+                        }
+                    }
+                );
+            }
+        });
+    } catch (error) {
+        console.error('Error retrieving number of seats:', error);
+        res.status(500).json({ error: 'An error occurred while retrieving the number of seats.' });
+    }
+});
 
 app.listen(5000, () => {
     console.log('Server listening on port 3001');

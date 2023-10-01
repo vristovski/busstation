@@ -15,6 +15,8 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 
 class Home extends Component {
     constructor(props) {
@@ -31,6 +33,13 @@ class Home extends Component {
             firstLetter: '',
             role: '',
             open: false,
+            startPoint: '',
+            endPoint: '',
+            arrivalTime: '',
+            departureTime: '',
+            distance: '',
+            company: '',
+            admin: false,
         };
     }
 
@@ -73,6 +82,7 @@ class Home extends Component {
         this.state.firstLetter = localStorage.getItem("email").charAt(0).toUpperCase();
         this.state.role = localStorage.getItem("role");
         this.fetchSchedule();
+        this.isAdmin();
     }
 
     handleOpen () {
@@ -81,6 +91,47 @@ class Home extends Component {
 
     handleClose () {
         this.setState({open: false});
+    }
+
+    handleCompanyChange = (event) => {
+        const selectedCompany = event.target.value;
+        this.setState({ company: selectedCompany });
+    };
+
+    handleAddRoute = async () => {
+        try {
+            console.log(
+                "company", this.state.company,
+                "distance", this.state.distance,
+                "startpoint", this.state.startPoint,
+                "endpoint", this.state.endPoint,
+                "arrivaltime", this.state.arrivalTime,
+                "departuretime", this.state.departureTime
+            )
+
+            const response = await axios.post('/addRoute', {
+                Start_Point: this.state.startPoint,
+                End_Point: this.state.endPoint,
+                Arrival_Time: this.state.arrivalTime,
+                Departure_Time: this.state.departureTime,
+                Distance: this.state.distance,
+                ID_Bus_Company: parseInt(this.state.company),
+
+            });
+            if(response.data){
+                this.setState({open: false});
+            }
+        } catch (error) {
+        }
+    };
+
+    isAdmin () {
+        const userRole = localStorage.getItem('role');
+        if (userRole === 'Admin') {
+            this.setState({ admin: true });
+        } else {
+            this.setState({ admin: false });
+        }
     }
 
 
@@ -166,6 +217,73 @@ class Home extends Component {
                         </form>
                     </div>
                     <div className="table">
+                        <button type="submit" style={{marginLeft: '10px', display: this.state.admin ? 'block' : 'none'}} onClick={() => {this.handleOpen()}}>Додај рута</button>
+                        <div className="dialog">
+                            <Dialog open={this.state.open} onClose={() => {this.handleClose()}}>
+                                <DialogTitle>Додај рута</DialogTitle>
+                                <DialogContent>
+                                    <FormControl>
+                                        <FormLabel id="demo-row-radio-buttons-group-label">Компанија</FormLabel>
+                                        <Select
+                                            labelId="demo-simple-select-label"
+                                            id="demo-simple-select"
+                                            onChange={this.handleCompanyChange}
+                                        >
+                                            <MenuItem value={1}>ABC Inc.</MenuItem>
+                                            <MenuItem value={2}>Acme Industries</MenuItem>
+                                            <MenuItem value={3}>MegaCorp Inc.</MenuItem>
+                                            <MenuItem value={4}>Globex Corp.</MenuItem>
+                                            <MenuItem value={5}>Initech</MenuItem>
+                                            <MenuItem value={6}>Mom's Friendly</MenuItem>
+                                            <MenuItem value={7}>Hooli</MenuItem>
+                                            <MenuItem value={8}>XYZ Corporation</MenuItem>
+                                            <MenuItem value={9}>Widget Co.</MenuItem>
+                                            <MenuItem value={10}>Stark Industries</MenuItem>
+                                        </Select>
+
+                                        <TextField
+                                            name="startPoint"
+                                            label="Почетна точка"
+                                            type="text"
+                                            value={this.state.startPoint}
+                                            onChange={this.handleChange}
+                                        />
+                                        <TextField
+                                            name="endPoint"
+                                            label="Крајна точка"
+                                            type="text"
+                                            value={this.state.endPoint}
+                                            onChange={this.handleChange}
+                                        />
+                                        <TextField
+                                            name="departureTime"
+                                            label="Време на тргнување"
+                                            type="text"
+                                            value={this.state.departureTime}
+                                            onChange={this.handleChange}
+                                        />
+                                        <TextField
+                                            name="arrivalTime"
+                                            label="Време на пристигнување"
+                                            type="text"
+                                            value={this.state.arrivalTime}
+                                            onChange={this.handleChange}
+                                        />
+                                        <TextField
+                                            name="distance"
+                                            label="Растојание"
+                                            type="text"
+                                            value={this.state.distance}
+                                            onChange={this.handleChange}
+                                        />
+                                    </FormControl>
+                                </DialogContent>
+                                <DialogActions>
+                                    <Button onClick={() => {this.handleClose()}}>Откажи</Button>
+                                    <Button onClick={() => {this.handleAddRoute()}}>Зачувај</Button>
+                                </DialogActions>
+                            </Dialog>
+                        </div>
                         <table style={{display: this.state.show ?  'block' : 'none'}}>
                             <thead>
                             <tr>
