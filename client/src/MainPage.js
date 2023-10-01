@@ -90,7 +90,7 @@ class MainPage extends Component {
                                 <p>International - Intercity <b>Bus Station - Skopje</b></p>
                             </div>
                         </div>
-                        <div className="button-container">
+                        <div className="button-container" style={{marginLeft: '110px'}}>
                             <button className="signin-button"><Link to="/login">Најави се</Link></button>
                             <button className="signup-button"><Link to="/register">Регистрирај се</Link></button>
                         </div>
