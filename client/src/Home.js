@@ -17,6 +17,8 @@ import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 class Home extends Component {
     constructor(props) {
@@ -40,6 +42,13 @@ class Home extends Component {
             distance: '',
             company: '',
             admin: false,
+            openEdit: false,
+            startPointEdit: '',
+            endPointEdit: '',
+            arrivalTimeEdit: '',
+            departureTimeEdit: '',
+            distanceEdit: '',
+            idRoute: '',
         };
     }
 
@@ -121,6 +130,7 @@ class Home extends Component {
             if(response.data){
                 this.setState({open: false});
             }
+            this.componentDidMount();
         } catch (error) {
         }
     };
@@ -132,6 +142,56 @@ class Home extends Component {
         } else {
             this.setState({ admin: false });
         }
+    }
+
+    handleEditRoute = (route) => {
+        console.log('Editing route: ', route);
+        this.setState({
+            startPointEdit: route.Start_Point,
+            endPointEdit: route.End_Point,
+            arrivalTimeEdit: route.Arrival_Time,
+            departureTimeEdit: route.Departure_Time,
+            distanceEdit: route.Distance,
+            idRoute: route.ID_Route
+        });
+
+    }
+
+    handleDeleteRoute = async (route) => {
+        if(window.confirm('Are you sure you want to delete this route?')) {
+            const response = await axios.post('/deleteRoute', {
+                ID_Route: parseInt(route.ID_Route)
+            });
+            this.componentDidMount();
+            if(response.data){
+                console.log(response.data);
+            }
+        }
+    }
+
+    handleEdit = async () => {
+            console.log(
+                "distance", this.state.distanceEdit,
+                "startpoint", this.state.startPointEdit,
+                "endpoint", this.state.endPointEdit,
+                "arrivaltime", this.state.arrivalTimeEdit,
+                "departuretime", this.state.departureTimeEdit,
+                "idRoute", this.state.idRoute
+            )
+            this.handleCloseEdit();
+            console.log('openEdit', this.state.openEdit);
+            const response = await axios.post('/editRoute', {
+                Start_Point: this.state.startPointEdit,
+                End_Point: this.state.endPointEdit,
+                Arrival_Time: this.state.arrivalTimeEdit,
+                Departure_Time: this.state.departureTimeEdit,
+                Distance: this.state.distanceEdit,
+                ID_Route: this.state.idRoute,
+            });
+    };
+
+    handleCloseEdit () {
+        this.setState({openEdit: false});
     }
 
 
@@ -166,7 +226,7 @@ class Home extends Component {
                                 <p>International - Intercity <b>Bus Station - Skopje</b></p>
                             </div>
                         </div>
-                        <div className="button-container" style={{marginLeft: '150px'}}>
+                        <div className="button-container" style={{marginLeft: '105px'}}>
                             <button className="signup-button"><Link to="/reservation">Резервирај</Link></button>
                             <button className="signin-button" style={{marginLeft: '15px'}}><Link to="/">Одјави се</Link></button>
                             <button className="circle" style={{marginLeft: '15px'}}><Link to="/profile">{this.state.firstLetter}</Link></button>
@@ -294,6 +354,8 @@ class Home extends Component {
                                 <th>Заминува</th>
                                 <th>Пристигнува</th>
                                 <th>Растојание</th>
+                                {this.state.admin && <th></th>}
+                                {this.state.admin && <th></th>}
                             </tr>
                             </thead>
                             <tbody>
@@ -306,6 +368,20 @@ class Home extends Component {
                                     <td>{row.Departure_Time}</td>
                                     <td>{row.Arrival_Time}</td>
                                     <td>{row.Distance}</td>
+                                    {
+                                        this.state.admin && (
+                                            <td>
+                                                <button onClick={() => {this.handleEditRoute(row); this.setState({openEdit: true})}} className="EditButton">Edit</button>
+                                            </td>
+                                        )
+                                    }
+                                    {
+                                        this.state.admin && (
+                                            <td>
+                                                <button onClick={() => this.handleDeleteRoute(row)} className="DeleteButton">Delete</button>
+                                            </td>
+                                        )
+                                    }
                                 </tr>
                             ))}
                             </tbody>
@@ -336,22 +412,59 @@ class Home extends Component {
                             </tbody>
                         </table>
                     </div>
-                    {/*<div style={{display: this.state.role === 'Admin' ?  'block' : 'none'}}>*/}
-                    {/*    <button className="addRouteButton" onClick={() => {this.setState({open: true})}}>Додај рута</button>*/}
-                    {/*    <div className="dialog1">*/}
-                    {/*        <Dialog open={this.state.open} onClose={() => {this.handleClose()}}>*/}
-                    {/*            <DialogTitle>Додај рута</DialogTitle>*/}
-                    {/*            <DialogContent>*/}
-                    {/*                <FormControl>*/}
-                    {/*                </FormControl>*/}
-                    {/*            </DialogContent>*/}
-                    {/*            <DialogActions>*/}
-                    {/*                <Button onClick={() => {this.handleClose()}}>Откажи</Button>*/}
-                    {/*                <Button>Зачувај</Button>*/}
-                    {/*            </DialogActions>*/}
-                    {/*        </Dialog>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
+                    <div className="dialog1">
+                        <Dialog open={this.state.openEdit} onClose={() => {this.handleCloseEdit()}}>
+                            <DialogTitle>Уреди рута</DialogTitle>
+                            <DialogContent>
+                                <FormControl>
+                                    <TextField
+                                        name="startPointEdit"
+                                        label="Почетна точка"
+                                        type="text"
+                                        value={this.state.startPointEdit}
+                                        onChange={this.handleChange}
+                                        style={{paddingBottom: '5px', marginTop: '3px'}}
+                                    />
+                                    <TextField
+                                        name="endPointEdit"
+                                        label="Крајна точка"
+                                        type="text"
+                                        value={this.state.endPointEdit}
+                                        onChange={this.handleChange}
+                                        style={{paddingBottom: '5px'}}
+                                    />
+                                    <TextField
+                                        name="departureTimeEdit"
+                                        label="Време на тргнување"
+                                        type="text"
+                                        value={this.state.departureTimeEdit}
+                                        onChange={this.handleChange}
+                                        style={{paddingBottom: '5px'}}
+                                    />
+                                    <TextField
+                                        name="arrivalTimeEdit"
+                                        label="Време на пристигнување"
+                                        type="text"
+                                        value={this.state.arrivalTimeEdit}
+                                        onChange={this.handleChange}
+                                        style={{paddingBottom: '5px'}}
+                                    />
+                                    <TextField
+                                        name="distanceEdit"
+                                        label="Растојание"
+                                        type="text"
+                                        value={this.state.distanceEdit}
+                                        onChange={this.handleChange}
+                                        style={{paddingBottom: '5px'}}
+                                    />
+                                </FormControl>
+                            </DialogContent>
+                            <DialogActions>
+                                <Button onClick={() => {this.handleCloseEdit()}}>Откажи</Button>
+                                <Button onClick={() => {this.handleEdit(); this.componentDidMount();}}>Зачувај</Button>
+                            </DialogActions>
+                        </Dialog>
+                    </div>
                 </div>
                 <div className="footer">
                     <div className="middleNav" style={{marginLeft: '535px'}}>
@@ -366,7 +479,6 @@ class Home extends Component {
                         </div>
                     </div>
                     <div style={{borderTop: '1px solid gray', width: '1300px', marginLeft: '100px', marginRight: '100px'}}>
-
                     </div>
                     <div>
                         <nav className="reservationFooter">
