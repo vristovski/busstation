@@ -111,7 +111,7 @@ app.get('/schedule', (req, res) => {
             } else {
                 const schedule = queryRes.rows;
                 res.json(schedule);
-                console.log("schedule", schedule);
+                //console.log("schedule", schedule);
             }
         }
     );
@@ -389,6 +389,40 @@ app.post('/addRoute', async (req, res) => {
         console.error('Error retrieving number of seats:', error);
         res.status(500).json({ error: 'An error occurred while retrieving the number of seats.' });
     }
+});
+
+app.post('/editRoute', async (req, res) => {
+    const { Start_Point, End_Point, Arrival_Time, Departure_Time, Distance, ID_Route } = req.body;
+    console.log("req.body", req.body);
+    pool.query(
+        `UPDATE "Busify"."Route" SET "Start_Point" = $1, "End_Point" = $2, "Arrival_Time" = $3, "Departure_Time" = $4, "Distance" = $5 WHERE "ID_Route" = $6`,
+        [Start_Point, End_Point, Arrival_Time, Departure_Time, Distance, ID_Route],
+        (err, queryRes) => {
+            if (err) {
+                console.error('Error executing query:', err);
+                res.status(500).json({ error: 'An error occurred while fetching the reviews.' });
+            } else {
+                console.error('Success:', queryRes);
+            }
+        }
+    );
+});
+
+app.post('/deleteRoute', async (req, res) => {
+    const { ID_Route } = req.body;
+    console.log("req.body for delete", req.body);
+    pool.query(
+        `DELETE FROM "Busify"."Route" WHERE "ID_Route" = $1`,
+        [ID_Route],
+        (err, queryRes) => {
+            if (err) {
+                console.error('Error executing query:', err);
+                res.status(500).json({ error: 'An error occurred while fetching the reviews.' });
+            } else {
+                console.error('Success:', queryRes);
+            }
+        }
+    );
 });
 
 app.listen(5000, () => {

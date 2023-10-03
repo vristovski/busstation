@@ -191,3 +191,27 @@ table td{
     margin-top: -1px;
 }
 
+.EditButton {
+    background-color: #125699;
+    color: #fff;
+    padding: 2px 2px;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+    font-family: 'Baloo Thambi 2', cursive;
+    height: 35px;
+    width: 50px;
+}
+
+.DeleteButton {
+    background-color: darkred;
+    color: #fff;
+    padding: 2px 2px;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+    font-family: 'Baloo Thambi 2', cursive;
+    height: 35px;
+    width: 50px;
+}
+
